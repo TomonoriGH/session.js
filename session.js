@@ -35,7 +35,7 @@ export default function Session() {
     })
     
     this.fetch = async function (...args) {
-        const request = this.getRequest(args)
+        const request = this.createRequest(args)
 
         const res = await fetch(request)
 
@@ -45,7 +45,7 @@ export default function Session() {
         return res
     }
 
-    this.getRequest = function(...args){
+    this.createRequest = function(...args){
         // requestオブジェクト作成
         let request;
         if(args[0] instanceof Request){
@@ -63,7 +63,7 @@ export default function Session() {
         }else{
             already = ""
         }
-        request.headers.set("cookies",already + cookie_append)
+        request.headers.set("cookie",already + cookie_append)
 
         return request
     }
