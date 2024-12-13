@@ -75,6 +75,7 @@ export default function Session() {
             dict.value = v;
             dict.domain = options.domain;
             dict.expires = options?.expires
+            this.cookies = this.cookies.filter(e => e.name != dict.name)
             this.cookies.push(dict)
         }
     }
@@ -92,6 +93,7 @@ export default function Session() {
                 if(options?.domain) throw new Error("there is cookie which does not have attribute \"domain\". give options?.hostname to use its domain.")
                 dict.domain == options?.domain
             }
+            this.cookies = this.cookies.filter(e => e.name != dict.name)
             this.cookies.push(dict)
         }
     }
@@ -112,5 +114,9 @@ export default function Session() {
             cookies.push(dict)
         }
         return cookies
+    }
+
+    this.ExportAsHeaderString = function(){
+        return this.cookies.map(e => `${e.name}=${e.value}`).join("; ")
     }
 }
