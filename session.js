@@ -69,7 +69,6 @@ export default function Session() {
     }
 
     this.ImportFromHeaderString = function(str,options){
-        // for(const [k,v] of str.split(/; */).map(e => e.split("="))){
         for(const [k,v] of str.split(/; */).map(e => e.split(/(?<=^[^=]*?)=/))){
             const dict = {}
             dict.name = k;
