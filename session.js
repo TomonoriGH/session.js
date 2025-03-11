@@ -35,7 +35,7 @@ export default function Session() {
     })
     
     this.fetch = async function (...args) {
-        const request = this.createRequest(args)
+        const request = this.createRequest(...args)
 
         const res = await fetch(request)
 
