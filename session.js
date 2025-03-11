@@ -69,7 +69,8 @@ export default function Session() {
     }
 
     this.ImportFromHeaderString = function(str,options){
-        for(const [k,v] of str.split(/; */).map(e => e.split("="))){
+        // for(const [k,v] of str.split(/; */).map(e => e.split("="))){
+        for(const [k,v] of str.split(/; */).map(e => e.split(/(?<=^[^=]*?)=/))){
             const dict = {}
             dict.name = k;
             dict.value = v;
@@ -82,7 +83,7 @@ export default function Session() {
 
     this.ImportFromSetCookieStrings = function(strs,options){
         for(const str of strs){
-            const kvs = str.split("; ").map(e => [e.split("=")[0],e.split("=").slice(1).join("")])
+            const kvs = str.split("; ").map(e => e.split(/(?<=^[^=]*?)=/))
             const dict = {}
             dict.name = kvs[0][0]
             dict.value = kvs[0][1]
