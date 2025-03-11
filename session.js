@@ -101,7 +101,7 @@ export default function Session() {
     this.ParseHeaderStrings = function(strs,domain){
         const cookies = []
         for (const cookie of strs) {
-            const kvs = cookie.split("; ").map(e => e.split("="))
+            const kvs = cookie.split("; ").map(e => e.split(/(?<=^[^=]*?)=/))
             const dict = {}
             dict.name = kvs[0][0]
             dict.value = kvs[0][1]
